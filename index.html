@@ -198,7 +198,7 @@
         </div>
         <div class="tp-g2" id="workGrid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px">
           <!-- 1 -->
-          <article class="tp-card tp-rv" style="scroll-margin-top: 88px">
+          <article class="tp-card tp-rv" data-order="5" style="scroll-margin-top: 88px">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
               <span class="tp-role">서비스 기획</span>
               <span class="tp-period">2023 — 2024</span>
@@ -223,7 +223,7 @@
           </article>
 
           <!-- 2 -->
-          <article class="tp-card tp-rv" style="scroll-margin-top: 88px">
+          <article class="tp-card tp-rv" data-order="6" style="scroll-margin-top: 88px">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
               <span class="tp-role">서비스 기획</span>
               <span class="tp-period">2023</span>
@@ -247,7 +247,7 @@
           </article>
 
           <!-- 3 -->
-          <article class="tp-card tp-rv" style="scroll-margin-top: 88px">
+          <article class="tp-card tp-rv" data-order="4" style="scroll-margin-top: 88px">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
               <span class="tp-role">서비스 기획</span>
               <span class="tp-period">2024</span>
@@ -270,7 +270,7 @@
           </article>
 
           <!-- 4 -->
-          <article class="tp-card tp-rv" style="scroll-margin-top: 88px">
+          <article class="tp-card tp-rv" data-order="1" style="scroll-margin-top: 88px">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
               <span class="tp-role">서비스 기획</span>
               <span class="tp-period">2025</span>
@@ -293,7 +293,7 @@
           </article>
 
           <!-- 5 -->
-          <article class="tp-card tp-rv" style="scroll-margin-top: 88px">
+          <article class="tp-card tp-rv" data-order="2" style="scroll-margin-top: 88px">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
               <span class="tp-role">서비스 기획</span>
               <span class="tp-period">2024 — 2025</span>
@@ -316,7 +316,7 @@
           </article>
 
           <!-- 6 (hidden) -->
-          <article class="tp-card tp-rv tp-hidden" style="scroll-margin-top: 88px; display: none">
+          <article class="tp-card tp-rv" data-order="3" style="scroll-margin-top: 88px">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
               <span class="tp-role">운영 · 자동화</span>
               <span class="tp-period">2023 — 2025</span>
@@ -339,7 +339,7 @@
           </article>
 
           <!-- 7 (hidden) -->
-          <article class="tp-card tp-rv tp-hidden" style="scroll-margin-top: 88px; display: none">
+          <article class="tp-card tp-rv" data-order="9" style="scroll-margin-top: 88px">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
               <span class="tp-role">UX / UI</span>
               <span class="tp-period">2021.03 — 2021.08</span>
@@ -363,7 +363,7 @@
           </article>
 
           <!-- 8 (hidden) -->
-          <article class="tp-card tp-rv tp-hidden" style="scroll-margin-top: 88px; display: none">
+          <article class="tp-card tp-rv" data-order="8" style="scroll-margin-top: 88px">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
               <span class="tp-role">UX / UI</span>
               <span class="tp-period">2021.11 — 2022.03</span>
@@ -387,7 +387,7 @@
           </article>
 
           <!-- 9 (hidden) -->
-          <article class="tp-card tp-rv tp-hidden" style="scroll-margin-top: 88px; display: none">
+          <article class="tp-card tp-rv" data-order="7" style="scroll-margin-top: 88px">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
               <span class="tp-role">UX / UI</span>
               <span class="tp-period">2022.04 — 2022.08</span>
@@ -525,15 +525,29 @@
         });
       });
 
-      // 기본 5개만 노출 → 더보기를 누르면 전부 펼친 채로 유지(접기 없음)
-      var hidden = document.querySelectorAll('.tp-hidden');
+      // 프로젝트 카드: data-order(최신순) 로 정렬 → 기본 5개만 노출
+      // 더보기를 누르면 전부 펼친 채로 유지(접기 없음)
+      var VISIBLE = 5;
+      var grid = document.getElementById('workGrid');
       var moreBtn = document.getElementById('moreBtn');
-      document.getElementById('moreText').textContent = '프로젝트 ' + hidden.length + '개 더보기';
-      moreBtn.addEventListener('click', function () {
-        hidden.forEach(function (el) { el.style.display = 'flex'; });
+      var cards = Array.prototype.slice.call(grid.querySelectorAll('.tp-card'));
+
+      cards.sort(function (a, b) { return Number(a.dataset.order) - Number(b.dataset.order); });
+      cards.forEach(function (c) { grid.appendChild(c); });
+
+      var hidden = cards.slice(VISIBLE);
+      hidden.forEach(function (el) { el.style.display = 'none'; });
+
+      if (hidden.length === 0) {
         moreBtn.style.display = 'none';
-        if (hidden[0]) hidden[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
-      });
+      } else {
+        document.getElementById('moreText').textContent = '프로젝트 ' + hidden.length + '개 더보기';
+        moreBtn.addEventListener('click', function () {
+          hidden.forEach(function (el) { el.style.display = 'flex'; });
+          moreBtn.style.display = 'none';
+          hidden[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      }
     </script>
   </body>
 </html>
