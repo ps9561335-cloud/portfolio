@@ -1,0 +1,14 @@
+{
+  "name": "dain-portfolio",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "박다인 포트폴리오 · 경력기술서 (GitHub Pages)",
+  "scripts": {
+    "serve": "python3 -m http.server 4180",
+    "pdf": "node scripts/generate-career-pdf.mjs"
+  },
+  "devDependencies": {
+    "puppeteer": "^24.37.3"
+  }
+}
