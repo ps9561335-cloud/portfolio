@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+
+    <title>박다인 | 커머스 서비스 기획자 포트폴리오</title>
+    <meta
+      name="description"
+      content="상품상세·검색·APP·백오피스를 담당한 커머스 서비스 기획자 박다인의 포트폴리오. 전환율 +19.92%, 검색 주문금액 +113%, 운영 업무시간 60% 단축 등 배포 후 숫자로 검증한 기획 사례를 소개합니다."
+    />
+    <meta
+      name="keywords"
+      content="박다인, 서비스 기획자, 커머스 기획, 상품상세, 검색 기획, 백오피스, BOS, UX 기획, UI 기획, 포트폴리오, 홈앤쇼핑, 이커머스"
+    />
+    <meta name="author" content="박다인 (Park Da In)" />
+    <!-- 링크를 아는 사람만 열람: 검색엔진 색인 제외 -->
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="googlebot" content="noindex, nofollow" />
+
+    <style>
+      /* ── 공통 (src/index.css) ── */
+      :root {
+        --color-bg: #ffffff;
+        --color-text: #191f28;
+        --color-accent: #3182f6;
+        --color-accent-dark: #1b64da;
+        --font-body: 'Pretendard', -apple-system, system-ui, 'Noto Sans KR', sans-serif;
+        --transition: 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+      }
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html {
+        scroll-behavior: smooth;
+        background: var(--color-bg);
+        min-height: 100%;
+        width: 100%;
+        overflow-x: hidden;
+      }
+      body {
+        font-family: var(--font-body);
+        background: var(--color-bg);
+        color: var(--color-text);
+        line-height: 1.7;
+        letter-spacing: -0.02em;
+        word-break: keep-all;
+        -webkit-font-smoothing: antialiased;
+        min-height: 100%;
+        width: 100%;
+        overflow-x: hidden;
+      }
+      ::selection { background: #c9e2ff; }
+      a { color: var(--color-accent); text-decoration: none; transition: color var(--transition); }
+      a:hover { color: var(--color-accent-dark); text-decoration: underline; }
+
+      /* ── Toss redesign (src/components/TossPage.css) ── */
+      .tp { max-width: 1120px; margin: 0 auto; padding: 0 24px 40px; }
+      .tp a { color: #191f28; text-decoration: none; }
+      .tp a:hover { color: #3182f6; }
+
+      @keyframes tp-rise {
+        from { opacity: 0; transform: translateY(24px); }
+        to { opacity: 1; transform: none; }
+      }
+      .tp-rv { animation: tp-rise 0.7s cubic-bezier(0.2, 0.8, 0.2, 1) both; }
+
+      .tp-header {
+        position: sticky;
+        top: 0;
+        z-index: 30;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 68px;
+        background: rgba(255, 255, 255, 0.86);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+      }
+      .tp-brand { font-size: 17px; font-weight: 700; }
+      .tp-nav { display: flex; align-items: center; gap: 8px; }
+      .tp-nav-link {
+        font-size: 15px; font-weight: 600; color: #4e5968;
+        padding: 8px 12px; border-radius: 10px; background: none; border: none; cursor: pointer;
+        font-family: inherit; letter-spacing: inherit;
+      }
+      .tp-nav-link:hover { background: #f2f4f6; color: #191f28; }
+      .tp-nav-cta {
+        font-size: 15px; font-weight: 700; color: #fff; background: #191f28;
+        padding: 10px 18px; border-radius: 999px; margin-left: 6px; border: none; cursor: pointer;
+        font-family: inherit; letter-spacing: inherit;
+      }
+      .tp-nav-cta:hover { background: #3182f6; color: #fff; }
+
+      .tp .tp-btn { font-size: 17px; font-weight: 700; padding: 16px 28px; border-radius: 14px; display: inline-block; font-family: inherit; letter-spacing: inherit; }
+      .tp .tp-btn-primary { background: #3182f6; color: #fff; }
+      .tp .tp-btn-primary:hover { background: #1b64da; color: #fff; }
+      .tp .tp-btn-soft { background: #f2f4f6; color: #191f28; }
+      .tp .tp-btn-soft:hover { background: #e5e8eb; color: #191f28; }
+      .tp .tp-btn-dark-primary { background: #3182f6; color: #fff; }
+      .tp .tp-btn-dark-primary:hover { background: #1b64da; color: #fff; }
+      .tp .tp-btn-dark-ghost { background: rgba(255,255,255,.1); color: #fff; }
+      .tp .tp-btn-dark-ghost:hover { background: rgba(255,255,255,.2); color: #fff; }
+      .tp .tp-cbtn { min-width: 164px; text-align: center; }
+
+      .tp-card {
+        background: #fff; border: 1px solid #f2f4f6; border-radius: 24px; padding: 32px;
+        display: flex; flex-direction: column; transition: box-shadow .2s, transform .2s;
+      }
+      .tp-card:hover { box-shadow: 0 12px 32px rgba(25,31,40,.09); transform: translateY(-3px); }
+      .tp-more {
+        display: inline-flex; align-items: center; gap: 4px;
+        font-family: inherit; letter-spacing: -0.02em; cursor: pointer;
+        border: none; background: none; color: #6b7684;
+        font-size: 16px; font-weight: 600; padding: 8px 0; white-space: nowrap;
+        transition: color .15s;
+      }
+      .tp-more:hover { color: #3182f6; }
+      .tp-clink { transition: background .2s; }
+      .tp-clink:hover { background: rgba(255,255,255,.12); color: #fff; }
+
+      .tp-tag { font-size: 13px; font-weight: 600; color: #6b7684; background: #f2f4f6; padding: 6px 11px; border-radius: 8px; }
+      .tp-stat { background: #f9fafb; border-radius: 16px; padding: 18px 20px; }
+      .tp-stat-v { font-size: 26px; font-weight: 800; letter-spacing: -0.04em; color: #3182f6; }
+      .tp-stat-l { font-size: 14px; font-weight: 500; color: #8b95a1; margin-top: 4px; }
+      .tp-role { font-size: 13px; font-weight: 700; color: #8b95a1; background: #f2f4f6; padding: 6px 12px; border-radius: 999px; }
+      .tp-period { font-size: 13px; font-weight: 600; color: #b0b8c1; }
+      .tp-ctitle { font-size: 24px; font-weight: 800; letter-spacing: -0.03em; line-height: 1.35; margin: 0 0 12px; }
+      .tp-cbody { font-size: 16px; line-height: 1.7; color: #4e5968; margin: 0 0 24px; flex: 1; }
+
+      @media (max-width: 900px) {
+        .tp-g2 { grid-template-columns: 1fr !important; }
+        .tp-g3 { grid-template-columns: 1fr !important; }
+        .tp-h1 { font-size: 40px !important; }
+        .tp-row { grid-template-columns: 1fr !important; gap: 8px !important; }
+        .tp-nav { display: none !important; }
+        .tp-contact { padding: 44px 28px !important; }
+        .tp-contact h2 { font-size: 30px !important; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="tp">
+      <!-- Header -->
+      <header class="tp-header">
+        <button class="tp-brand" style="background: none; border: none; cursor: pointer" data-scroll="top">박다인</button>
+        <nav class="tp-nav">
+          <button class="tp-nav-link" data-scroll="work">프로젝트</button>
+          <button class="tp-nav-link" data-scroll="about">소개</button>
+          <button class="tp-nav-link" data-scroll="career">경력</button>
+          <button class="tp-nav-cta" data-scroll="contact">연락하기</button>
+        </nav>
+      </header>
+
+      <!-- Hero -->
+      <section id="top" style="padding: 84px 0 96px">
+        <h1 class="tp-h1" style="font-size: 62px; font-weight: 800; line-height: 1.28; letter-spacing: -0.035em; margin: 0 0 28px">
+          사용자가 멈추는 지점을 찾아,<br />
+          <span style="color: #3182f6">전환</span>으로 연결합니다.
+        </h1>
+        <p style="font-size: 20px; line-height: 1.65; color: #4e5968; margin: 0 0 40px; max-width: 32em">
+          상품상세·검색·APP·백오피스까지, 커머스의 구매 흐름을 기획하고 운영합니다.
+          리뉴얼과 신규 서비스 도입을 배포로 끝내지 않고 전환율·매출로 결과를 확인합니다.
+        </p>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 56px">
+          <button class="tp-btn tp-btn-primary" style="border: none; cursor: pointer" data-scroll="work">프로젝트 보기</button>
+          <a class="tp-btn tp-btn-soft" href="박다인_경력기술서.pdf" download>경력기술서 받기</a>
+        </div>
+        <div class="tp-g3" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px">
+          <div style="background: #f9fafb; border-radius: 20px; padding: 26px 24px">
+            <div style="font-size: 34px; font-weight: 800; letter-spacing: -0.04em; color: #191f28">+19.92%</div>
+            <div style="font-size: 15px; font-weight: 500; color: #8b95a1; margin-top: 6px">상품상세 주문서 전환율</div>
+          </div>
+          <div style="background: #f9fafb; border-radius: 20px; padding: 26px 24px">
+            <div style="font-size: 34px; font-weight: 800; letter-spacing: -0.04em; color: #191f28">월 5,600만 원+</div>
+            <div style="font-size: 15px; font-weight: 500; color: #8b95a1; margin-top: 6px">신규 구좌 주문금액</div>
+          </div>
+          <div style="background: #f9fafb; border-radius: 20px; padding: 26px 24px">
+            <div style="font-size: 34px; font-weight: 800; letter-spacing: -0.04em; color: #191f28">60%</div>
+            <div style="font-size: 15px; font-weight: 500; color: #8b95a1; margin-top: 6px">검색운영 업무시간 단축</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Work -->
+      <section id="work" style="padding: 40px 0 96px">
+        <div style="display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; margin-bottom: 40px; flex-wrap: wrap">
+          <div>
+            <p style="font-size: 15px; font-weight: 700; color: #3182f6; margin: 0 0 12px">Selected Work</p>
+            <h2 style="font-size: 40px; font-weight: 800; letter-spacing: -0.035em; line-height: 1.32; margin: 0">
+              기획한 것들과,<br />그래서 달라진 숫자
+            </h2>
+          </div>
+          <button type="button" class="tp-more" id="moreBtn">
+            <span id="moreText">프로젝트 4개 더보기</span>
+            <span style="font-size: 13px">›</span>
+          </button>
+        </div>
+        <div class="tp-g2" id="workGrid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px">
+          <!-- 1 -->
+          <article class="tp-card tp-rv" style="scroll-margin-top: 88px">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
+              <span class="tp-role">서비스 기획</span>
+              <span class="tp-period">2023 — 2024</span>
+            </div>
+            <h3 class="tp-ctitle">상품상세 UI/UX 전면 리뉴얼</h3>
+            <p class="tp-cbody">
+              정보 배치와 리뷰 접근성 등 구매 결정을 막는 지점을 동종업계 벤치마킹으로 정리하고,
+              '원 페이지 스크롤' 구조로 상세를 다시 설계했어요. 기본정보 가독성·쿠폰·멤버십 등급 노출·묶음상품 탐색·Q&amp;A까지
+              기획부터 배포까지 담당했습니다.
+            </p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px">
+              <div class="tp-stat"><div class="tp-stat-v">3위 → 2위</div><div class="tp-stat-l">동종업계 만족도</div></div>
+              <div class="tp-stat"><div class="tp-stat-v">+19.92%</div><div class="tp-stat-l">주문서 전환율</div></div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px">
+              <span class="tp-tag">벤치마킹</span>
+              <span class="tp-tag">정보구조 재설계</span>
+              <span class="tp-tag">개인화</span>
+              <span class="tp-tag">쿠폰 리디자인</span>
+              <span class="tp-tag">성과 검증</span>
+            </div>
+          </article>
+
+          <!-- 2 -->
+          <article class="tp-card tp-rv" style="scroll-margin-top: 88px">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
+              <span class="tp-role">서비스 기획</span>
+              <span class="tp-period">2023</span>
+            </div>
+            <h3 class="tp-ctitle">상품상세 신규 서비스 6종 도입</h3>
+            <p class="tp-cbody">
+              묶음상품 바로구매, 지정일 배송, 사이즈톡(신체 사이즈 기반 추천), 3D 상품이미지, 앱 푸시 유도 팝업 등
+              구매 전환과 편의성 중심의 서비스를 순차적으로 도입했어요. 푸시 동의는 일평균 2,350명에서 10,498명으로 늘었습니다.
+            </p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px">
+              <div class="tp-stat"><div class="tp-stat-v">+346.7%</div><div class="tp-stat-l">앱 푸시 동의율</div></div>
+              <div class="tp-stat"><div class="tp-stat-v">20건</div><div class="tp-stat-l">외부 요청 배포 완료</div></div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px">
+              <span class="tp-tag">지정일 배송</span>
+              <span class="tp-tag">사이즈톡</span>
+              <span class="tp-tag">3D 상품이미지</span>
+              <span class="tp-tag">푸시 유도 팝업</span>
+              <span class="tp-tag">묶음상품</span>
+            </div>
+          </article>
+
+          <!-- 3 -->
+          <article class="tp-card tp-rv" style="scroll-margin-top: 88px">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
+              <span class="tp-role">서비스 기획</span>
+              <span class="tp-period">2024</span>
+            </div>
+            <h3 class="tp-ctitle">대체상품 자동노출 · 큐레이션 고도화</h3>
+            <p class="tp-cbody">
+              일시중단·판매종료 상품에서 생기던 이탈을 줄이기 위해, BOS 수기 등록에 의존하던 대체상품을
+              자동 추천 노출로 고도화했어요. 대체상품 월평균 직접매출이 170만 원에서 4,033만 원으로 늘었습니다.
+            </p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px">
+              <div class="tp-stat"><div class="tp-stat-v">+2,272%</div><div class="tp-stat-l">대체상품 직접매출</div></div>
+              <div class="tp-stat"><div class="tp-stat-v">+9.1%</div><div class="tp-stat-l">큐레이션 PV</div></div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px">
+              <span class="tp-tag">추천 로직</span>
+              <span class="tp-tag">자동 노출</span>
+              <span class="tp-tag">BOS</span>
+              <span class="tp-tag">이탈 개선</span>
+            </div>
+          </article>
+
+          <!-- 4 -->
+          <article class="tp-card tp-rv" style="scroll-margin-top: 88px">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
+              <span class="tp-role">서비스 기획</span>
+              <span class="tp-period">2025</span>
+            </div>
+            <h3 class="tp-ctitle">검색 중계 리뉴얼 · 신규 광고구좌</h3>
+            <p class="tp-cbody">
+              검색 중계 페이지의 콘텐츠를 단순화해 최근·인기 검색어 탭을 분리하고, 로그인 여부에 따라 개인화 추천을 분기했어요.
+              검색창 하단에 키보드 광고구좌를 새로 만들어 검색 화면을 매출 구좌로 연결했습니다.
+            </p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px">
+              <div class="tp-stat"><div class="tp-stat-v">+113%</div><div class="tp-stat-l">검색 주문금액(전년比)</div></div>
+              <div class="tp-stat"><div class="tp-stat-v">월 2,248만 원</div><div class="tp-stat-l">키보드 광고구좌</div></div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px">
+              <span class="tp-tag">검색 UX</span>
+              <span class="tp-tag">개인화 분기</span>
+              <span class="tp-tag">광고구좌</span>
+              <span class="tp-tag">성과 검증</span>
+            </div>
+          </article>
+
+          <!-- 5 -->
+          <article class="tp-card tp-rv" style="scroll-margin-top: 88px">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
+              <span class="tp-role">서비스 기획</span>
+              <span class="tp-period">2024 — 2025</span>
+            </div>
+            <h3 class="tp-ctitle">APP 사용성 혁신 — 제스처 · 결제 · 인증</h3>
+            <p class="tp-cbody">
+              앱카드 원터치 결제, AOS 생체인증(지문·페이스) 확대, 위젯 리뉴얼, 흔들기 제스처로 생방송·특가를 띄우는 기능까지
+              앱의 접근성과 편의성을 기획했어요. 흔들기 제스처는 월평균 PV 77,217건을 기록했습니다.
+            </p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px">
+              <div class="tp-stat"><div class="tp-stat-v">월 3,347만 원</div><div class="tp-stat-l">흔들기 제스처 주문금액</div></div>
+              <div class="tp-stat"><div class="tp-stat-v">원터치 · 생체인증</div><div class="tp-stat-l">앱 결제 · 로그인</div></div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px">
+              <span class="tp-tag">원터치 결제</span>
+              <span class="tp-tag">생체인증</span>
+              <span class="tp-tag">AOS 위젯</span>
+              <span class="tp-tag">제스처 UX</span>
+            </div>
+          </article>
+
+          <!-- 6 (hidden) -->
+          <article class="tp-card tp-rv tp-hidden" style="scroll-margin-top: 88px; display: none">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
+              <span class="tp-role">운영 · 자동화</span>
+              <span class="tp-period">2023 — 2025</span>
+            </div>
+            <h3 class="tp-ctitle">백오피스(BOS) 운영 효율화 · 자동화</h3>
+            <p class="tp-cbody">
+              검색운영 배너 등록을 RPA로 자동화하고, 묶음상품 일괄조회·엑셀 다운로드, 판매불가예약 대량 업로드 같은 반복 업무를 걷어냈어요.
+              착불 배송비 정책은 MC/PC·파트너스·BOS·챗봇·오픈마켓·EP제휴 전 채널에 일괄 적용되도록 정리했습니다.
+            </p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px">
+              <div class="tp-stat"><div class="tp-stat-v">17.5h → 7h</div><div class="tp-stat-l">검색운영 주간 업무시간</div></div>
+              <div class="tp-stat"><div class="tp-stat-v">2,888건</div><div class="tp-stat-l">마케팅 구좌 노출 지원</div></div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px">
+              <span class="tp-tag">RPA</span>
+              <span class="tp-tag">BOS</span>
+              <span class="tp-tag">일괄 처리</span>
+              <span class="tp-tag">채널 정책 적용</span>
+            </div>
+          </article>
+
+          <!-- 7 (hidden) -->
+          <article class="tp-card tp-rv tp-hidden" style="scroll-margin-top: 88px; display: none">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
+              <span class="tp-role">UX / UI</span>
+              <span class="tp-period">2021.03 — 2021.08</span>
+            </div>
+            <h3 class="tp-ctitle">WHOSCM · 배송설치 기사앱</h3>
+            <p class="tp-cbody">
+              오래된 PDA 기반 배송설치 시스템을 업무자의 실제 동선에 맞춰 다시 설계했어요.
+              입고예정 오더부터 배차·설치·중단·반납까지 한 흐름으로 수행하고 관리하도록 기획했습니다.
+            </p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px">
+              <div class="tp-stat"><div class="tp-stat-v">70%</div><div class="tp-stat-l">기획 기여도</div></div>
+              <div class="tp-stat"><div class="tp-stat-v">입고 ~ 반납</div><div class="tp-stat-l">업무 전 과정 설계</div></div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px">
+              <span class="tp-tag">Desk Research</span>
+              <span class="tp-tag">User Scenario</span>
+              <span class="tp-tag">IA</span>
+              <span class="tp-tag">Wireframe</span>
+              <span class="tp-tag">Test · QA</span>
+            </div>
+          </article>
+
+          <!-- 8 (hidden) -->
+          <article class="tp-card tp-rv tp-hidden" style="scroll-margin-top: 88px; display: none">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
+              <span class="tp-role">UX / UI</span>
+              <span class="tp-period">2021.11 — 2022.03</span>
+            </div>
+            <h3 class="tp-ctitle">SMART36 · 고객센터앱</h3>
+            <p class="tp-cbody">
+              상담원 연결까지 십 분이 걸리던 문의를 앱에서 스스로 해결하도록 기획했어요.
+              개인화 요금 고지서와 상담 챗봇, 미납 요금을 바로 납부하는 흐름을 설계했습니다.
+            </p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px">
+              <div class="tp-stat"><div class="tp-stat-v">100%</div><div class="tp-stat-l">단독 기획</div></div>
+              <div class="tp-stat"><div class="tp-stat-v">24시간</div><div class="tp-stat-l">비대면 셀프 상담</div></div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px">
+              <span class="tp-tag">이슈 도출</span>
+              <span class="tp-tag">Contents Map</span>
+              <span class="tp-tag">Wireframe</span>
+              <span class="tp-tag">AI 챗봇</span>
+              <span class="tp-tag">결제 플로우</span>
+            </div>
+          </article>
+
+          <!-- 9 (hidden) -->
+          <article class="tp-card tp-rv tp-hidden" style="scroll-margin-top: 88px; display: none">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px">
+              <span class="tp-role">UX / UI</span>
+              <span class="tp-period">2022.04 — 2022.08</span>
+            </div>
+            <h3 class="tp-ctitle">Cafe si · 무인 키오스크 리뉴얼</h3>
+            <p class="tp-cbody">
+              기존 화면의 가독성과 주문 확인 문제를 AS-IS 분석으로 정리하고, 상품 그리드와 주문 확인 목록을 다시 설계했어요.
+              관리자에게는 상품·재고·주문·투출 시험까지 원격으로 관리하는 화면을 제공했습니다.
+            </p>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px">
+              <div class="tp-stat"><div class="tp-stat-v">100%</div><div class="tp-stat-l">단독 기획</div></div>
+              <div class="tp-stat"><div class="tp-stat-v">고객 · 관리자</div><div class="tp-stat-l">양쪽 화면 설계</div></div>
+            </div>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px">
+              <span class="tp-tag">AS-IS 분석</span>
+              <span class="tp-tag">Contents Map</span>
+              <span class="tp-tag">Wireframe</span>
+              <span class="tp-tag">재고 · 관리자</span>
+              <span class="tp-tag">무인 · IoT</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- About -->
+      <section id="about" style="padding: 40px 0 96px">
+        <p style="font-size: 15px; font-weight: 700; color: #3182f6; margin: 0 0 12px">About</p>
+        <h2 style="font-size: 40px; font-weight: 800; letter-spacing: -0.035em; line-height: 1.32; margin: 0 0 16px">
+          쓰는 사람의 동선에서<br />기획을 시작합니다
+        </h2>
+        <p style="font-size: 19px; line-height: 1.7; color: #4e5968; margin: 0 0 44px; max-width: 34em">
+          화면을 먼저 그리지 않아요. 사용자가 실제로 멈추는 지점을 찾고, 배포한 뒤에는 숫자로 결과를 확인합니다.
+        </p>
+        <div class="tp-g3" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 56px">
+          <div class="tp-rv" style="background: #f9fafb; border-radius: 24px; padding: 30px">
+            <div style="width: 40px; height: 40px; border-radius: 12px; background: #e8f3ff; color: #3182f6; font-size: 18px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin-bottom: 20px">01</div>
+            <h3 style="font-size: 19px; font-weight: 700; letter-spacing: -0.03em; margin: 0 0 10px">데이터와 현장에서 출발</h3>
+            <p style="font-size: 15px; line-height: 1.7; color: #6b7684; margin: 0">경쟁사 벤치마킹과 운영 데이터로 문제를 먼저 정의해요. 무엇을 만들지보다 사용자가 어디서 멈추는지를 먼저 확인합니다.</p>
+          </div>
+          <div class="tp-rv" style="background: #f9fafb; border-radius: 24px; padding: 30px">
+            <div style="width: 40px; height: 40px; border-radius: 12px; background: #e8f3ff; color: #3182f6; font-size: 18px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin-bottom: 20px">02</div>
+            <h3 style="font-size: 19px; font-weight: 700; letter-spacing: -0.03em; margin: 0 0 10px">앞단과 뒷단을 함께 설계</h3>
+            <p style="font-size: 15px; line-height: 1.7; color: #6b7684; margin: 0">고객 화면만 그리지 않아요. 운영자가 쓰는 BOS와 정책까지 같이 설계해 수기로 메우던 일을 시스템이 처리하게 만듭니다.</p>
+          </div>
+          <div class="tp-rv" style="background: #f9fafb; border-radius: 24px; padding: 30px">
+            <div style="width: 40px; height: 40px; border-radius: 12px; background: #e8f3ff; color: #3182f6; font-size: 18px; font-weight: 800; display: flex; align-items: center; justify-content: center; margin-bottom: 20px">03</div>
+            <h3 style="font-size: 19px; font-weight: 700; letter-spacing: -0.03em; margin: 0 0 10px">배포 후 숫자로 확인</h3>
+            <p style="font-size: 15px; line-height: 1.7; color: #6b7684; margin: 0">배포로 끝내지 않아요. 전환율·PV·주문금액으로 결과를 확인하고, 그 숫자를 다음 개선의 근거로 씁니다.</p>
+          </div>
+        </div>
+        <div style="background: #fff; border: 1px solid #f2f4f6; border-radius: 24px; padding: 12px 32px">
+          <div class="tp-row" style="display: grid; grid-template-columns: 130px 1fr; gap: 24px; align-items: baseline; padding: 22px 0; border-bottom: 1px solid #f2f4f6">
+            <span style="font-size: 15px; font-weight: 700; color: #8b95a1">담당 영역</span>
+            <span style="font-size: 16px; font-weight: 500; color: #333d4b; line-height: 1.6">상품상세 · 검색(중계 · 운영) · APP · 상품BO(BOS)</span>
+          </div>
+          <div class="tp-row" style="display: grid; grid-template-columns: 130px 1fr; gap: 24px; align-items: baseline; padding: 22px 0; border-bottom: 1px solid #f2f4f6">
+            <span style="font-size: 15px; font-weight: 700; color: #8b95a1">기획</span>
+            <span style="font-size: 16px; font-weight: 500; color: #333d4b; line-height: 1.6">IA · Contents Map · User Scenario · Wireframe · 정책 정의</span>
+          </div>
+          <div class="tp-row" style="display: grid; grid-template-columns: 130px 1fr; gap: 24px; align-items: baseline; padding: 22px 0; border-bottom: 1px solid #f2f4f6">
+            <span style="font-size: 15px; font-weight: 700; color: #8b95a1">운영 · 자동화</span>
+            <span style="font-size: 16px; font-weight: 500; color: #333d4b; line-height: 1.6">BOS 운영 · RPA 자동화 · 대량 일괄 처리 · 전 채널 정책 적용</span>
+          </div>
+          <div class="tp-row" style="display: grid; grid-template-columns: 130px 1fr; gap: 24px; align-items: baseline; padding: 22px 0; border-bottom: none">
+            <span style="font-size: 15px; font-weight: 700; color: #8b95a1">성과 · 협업</span>
+            <span style="font-size: 16px; font-weight: 500; color: #333d4b; line-height: 1.6">전환율 · PV · 주문금액 검증 · 개발 / 디자인 / MD / 운영 협업</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Career -->
+      <section id="career" style="padding: 40px 0 96px">
+        <p style="font-size: 15px; font-weight: 700; color: #3182f6; margin: 0 0 12px">Career</p>
+        <h2 style="font-size: 40px; font-weight: 800; letter-spacing: -0.035em; line-height: 1.32; margin: 0 0 40px">지나온 자리</h2>
+        <div style="display: flex; flex-direction: column; gap: 12px">
+          <div class="tp-rv tp-row" style="display: grid; grid-template-columns: 220px 1fr; gap: 28px; background: #f9fafb; border-radius: 24px; padding: 30px 32px">
+            <div>
+              <div style="font-size: 15px; font-weight: 700; color: #3182f6">2023.06 — 현재</div>
+              <div style="font-size: 15px; font-weight: 500; color: #8b95a1; margin-top: 4px">(주)홈앤쇼핑 · 모바일운영팀</div>
+            </div>
+            <div>
+              <h3 style="font-size: 20px; font-weight: 700; letter-spacing: -0.03em; margin: 0 0 10px">서비스 기획 · 운영 (커머스 / 모바일)</h3>
+              <p style="font-size: 16px; line-height: 1.7; color: #4e5968; margin: 0">
+                상품상세·검색(중계·운영)·APP·상품BO 영역을 담당하며 신규 서비스 도입, UI/UX 리뉴얼, 백오피스 자동화를
+                기획–개발 협업–배포–성과 검증까지 진행했습니다. 연간 추진과제는 2024년 30건 중 29건, 2025년 20건 전건을 완료했습니다.
+              </p>
+            </div>
+          </div>
+          <div class="tp-rv tp-row" style="display: grid; grid-template-columns: 220px 1fr; gap: 28px; background: #f9fafb; border-radius: 24px; padding: 30px 32px">
+            <div>
+              <div style="font-size: 15px; font-weight: 700; color: #3182f6">2020 — 2022</div>
+              <div style="font-size: 15px; font-weight: 500; color: #8b95a1; margin-top: 4px">스마트삼육</div>
+            </div>
+            <div>
+              <h3 style="font-size: 20px; font-weight: 700; letter-spacing: -0.03em; margin: 0 0 10px">서비스 기획자 (UX / UI)</h3>
+              <p style="font-size: 16px; line-height: 1.7; color: #4e5968; margin: 0">
+                B2B 업무앱(WHOSCM 배송설치)·B2C 고객센터앱·무인 키오스크 S/W를 기획했습니다.
+                리서치와 UX 전략 수립부터 IA·와이어프레임, 테스트·QA까지 담당했습니다.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Contact -->
+      <section id="contact" class="tp-contact" style="background: #191f28; border-radius: 32px; padding: 72px 56px; margin-top: 24px">
+        <h2 style="font-size: 42px; font-weight: 800; letter-spacing: -0.035em; line-height: 1.32; color: #fff; margin: 0 0 16px">
+          같이 만들 것이 있다면<br />편하게 알려주세요
+        </h2>
+        <p style="font-size: 18px; line-height: 1.7; color: #8b95a1; margin: 0 0 36px">보통 하루 안에 답장 드려요.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 56px">
+          <a class="tp-btn tp-cbtn tp-btn-dark-primary" href="mailto:ps9561335@naver.com">이메일 보내기</a>
+          <a class="tp-btn tp-cbtn tp-btn-dark-ghost" href="박다인_경력기술서.pdf" download>경력기술서 PDF</a>
+          <a class="tp-btn tp-cbtn tp-btn-dark-ghost" href="career.html">경력기술서 보기</a>
+        </div>
+        <div class="tp-g3" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px">
+          <a class="tp-clink" href="mailto:ps9561335@naver.com" style="background: rgba(255,255,255,.06); border-radius: 18px; padding: 22px 24px; display: block">
+            <div style="font-size: 14px; font-weight: 600; color: #8b95a1">Email</div>
+            <div style="font-size: 17px; font-weight: 700; color: #fff; margin-top: 6px; word-break: break-all">ps9561335@naver.com</div>
+          </a>
+          <a class="tp-clink" href="#career" style="background: rgba(255,255,255,.06); border-radius: 18px; padding: 22px 24px; display: block">
+            <div style="font-size: 14px; font-weight: 600; color: #8b95a1">Career</div>
+            <div style="font-size: 17px; font-weight: 700; color: #fff; margin-top: 6px; word-break: break-all">홈앤쇼핑 · 스마트삼육</div>
+          </a>
+        </div>
+        <p style="font-size: 14px; color: #6b7684; margin: 56px 0 0">© 2026. 박다인</p>
+      </section>
+    </div>
+
+    <script>
+      document.querySelectorAll('[data-scroll]').forEach(function (el) {
+        el.addEventListener('click', function () {
+          var target = document.getElementById(el.dataset.scroll);
+          if (target) target.scrollIntoView({ behavior: 'smooth' });
+        });
+      });
+
+      // 기본 5개만 노출 → 더보기를 누르면 전부 펼친 채로 유지(접기 없음)
+      var hidden = document.querySelectorAll('.tp-hidden');
+      var moreBtn = document.getElementById('moreBtn');
+      document.getElementById('moreText').textContent = '프로젝트 ' + hidden.length + '개 더보기';
+      moreBtn.addEventListener('click', function () {
+        hidden.forEach(function (el) { el.style.display = 'flex'; });
+        moreBtn.style.display = 'none';
+        if (hidden[0]) hidden[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    </script>
+  </body>
+</html>
