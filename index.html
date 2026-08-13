@@ -191,10 +191,6 @@
               기획한 것들과,<br />그래서 달라진 숫자
             </h2>
           </div>
-          <button type="button" class="tp-more" id="moreBtn">
-            <span id="moreText">프로젝트 4개 더보기</span>
-            <span style="font-size: 13px">›</span>
-          </button>
         </div>
         <div class="tp-g2" id="workGrid" style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px">
           <!-- 1 -->
@@ -517,29 +513,12 @@
         });
       });
 
-      // 프로젝트 카드: data-order(최신순) 로 정렬 → 기본 5개만 노출
-      // 더보기를 누르면 전부 펼친 채로 유지(접기 없음)
-      var VISIBLE = 5;
+      // 프로젝트 카드: data-order(최신순) 로 정렬해 전부 노출
       var grid = document.getElementById('workGrid');
-      var moreBtn = document.getElementById('moreBtn');
-      var cards = Array.prototype.slice.call(grid.querySelectorAll('.tp-card'));
-
-      cards.sort(function (a, b) { return Number(a.dataset.order) - Number(b.dataset.order); });
-      cards.forEach(function (c) { grid.appendChild(c); });
-
-      var hidden = cards.slice(VISIBLE);
-      hidden.forEach(function (el) { el.style.display = 'none'; });
-
-      if (hidden.length === 0) {
-        moreBtn.style.display = 'none';
-      } else {
-        document.getElementById('moreText').textContent = '프로젝트 ' + hidden.length + '개 더보기';
-        moreBtn.addEventListener('click', function () {
-          hidden.forEach(function (el) { el.style.display = 'flex'; });
-          moreBtn.style.display = 'none';
-          hidden[0].scrollIntoView({ behavior: 'smooth', block: 'start' });
-        });
-      }
+      Array.prototype.slice
+        .call(grid.querySelectorAll('.tp-card'))
+        .sort(function (a, b) { return Number(a.dataset.order) - Number(b.dataset.order); })
+        .forEach(function (c) { grid.appendChild(c); });
     </script>
   </body>
 </html>
